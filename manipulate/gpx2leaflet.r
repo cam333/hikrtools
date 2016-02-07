@@ -35,11 +35,11 @@ nearest_waypoint <- function(time_stamp, waypoints, threshold=60) {
   
   waypoints$time <- ymd_hms(waypoints$time)
   
-  if (min(abs(waypoints$time - time_stamp)) > threshold) {
+  if (min(abs(ymd_hms(waypoints$time) - time_stamp)) > threshold) {
     return(NULL)
   }
   
-  wp_position <- which.min(abs(waypoints$time - time_stamp))
+  wp_position <- which.min(abs(ymd_hms(waypoints$time) - time_stamp))
   wpd <- as.data.frame(waypoints)
   wp_data <- wpd[wp_position,c('track_seg_point_id', 'coords.x1', 'coords.x2', 'ele')]
   rownames(wp_data) <- NULL
